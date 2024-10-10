@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentGrades {
+    public static void main(String[] args) {
+        // Create an ArrayList to store the grades
+        ArrayList<Double> grades = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String input;
+
+        // Prompt the teacher to enter grades
+        System.out.println("Enter the grades of students (type 'done' to finish): ");
+
+        // Reading grades from the user
+        while (true) {
+            input = scanner.nextLine();
+            if (input.equalsIgnoreCase("done")) {
+                break;
+            }
+            try {
+                double grade = Double.parseDouble(input);
+                grades.add(grade);  // Add grade to the ArrayList
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid grade or type 'done' to finish.");
+            }
+        }
+
+        // If no grades are entered
+        if (grades.isEmpty()) {
+            System.out.println("No grades were entered.");
+            return;
+        }
+
+        // Calculate average, highest, and lowest grades
+        double total = 0;
+        double highest = grades.get(0);
+        double lowest = grades.get(0);
+
+        for (double grade : grades) {
+            total += grade;
+            if (grade > highest) {
+                highest = grade;
+            }
+            if (grade < lowest) {
+                lowest = grade;
+            }
+        }
+
+        double average = total / grades.size();
+
+        // Display results
+        System.out.println("\nResults:");
+        System.out.println("Average grade: " + average);
+        System.out.println("Highest grade: " + highest);
+        System.out.println("Lowest grade: " + lowest);
+    }
+}
